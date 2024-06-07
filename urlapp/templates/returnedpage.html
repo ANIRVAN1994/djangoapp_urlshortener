@@ -1,0 +1,64 @@
+{% include 'navbar.html' %}
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="/static/style.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<div class="row" style="display: flex;">
+    <div class="col-sm-6">
+      <div class="card" style="margin-left: 15px; margin-top: 10px;">
+        <img src="/static/backgroundimage.jpg" class="card-img-top" alt="Image 1" style="height: 300px; width: 300px;">
+        <div class="card-body">
+          <h5 class="card-title">Try The URL Shortener</h5>
+          <p class="card-text" style="color: blueviolet;">Use this feature to get a customized short and clickable URL</p>
+          <div class="form-group">
+            <label for="exampleInput">Enter URL</label>
+            <input type="text" class="form-control" id="exampleInput" placeholder="Type here...">
+            <br>
+            <div>
+              <div>
+                {% if data %}
+                <p>Short URL: <a href="{{ data.originalurl }}">{{ data.shorturl }}</a></p>
+            {% else %}
+                <p>No saved data found.</p>
+            {% endif %}
+            </div>
+            </div>
+        </div>
+        
+        <br>
+        <button id="generateurl" type="button" class="btn btn-custom-1" onclick="generate_short_url()">Generte</button>
+        <script src="/static/index.js"></script>
+      </div>
+    </div>
+    </div> <!-- Close the col-sm-6 div here -->
+
+    <!-- Open a new col-sm-6 div for the second card -->
+    <div class="col-sm-6">
+      <div class="card" style="margin-top: 10px; margin-right: 15px;"> <!-- Remove margin-right: 15px; -->
+        <img src="/static/secimage.jpg" class="card-img-top" alt="Image 2" style="height: 300px; width: 500px;"> <!-- Adjust width -->
+        <div class="card-body">
+          <h5 class="card-title">Get Top 3 Domain Names</h5>
+          <p class="card-text" style="color: blueviolet;">Use this feature to get top URLs shortened by the users</p>
+          <button id="submitbutton" class="btn btn-capsule-cancel" onclick="makeapostcall()">Submit</button>
+          <h3></h3>
+          <script src="/static/index.js"></script>
+          <div>
+            <ul style="color: blueviolet;">
+              {% for domain in data %}
+                  <li><b>{{ domain.websitename }}: {{ domain.urlcount }}</b></li>
+              {% endfor %}
+          </ul>
+            </div>
+        </div>
+      </div>
+    </div> <!-- Close the col-sm-6 div here -->
+  </div>
+</body>
+</html>
+
+
+
